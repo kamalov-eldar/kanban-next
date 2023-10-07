@@ -8,7 +8,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 function SideBar() {
     const style = { color: "blue", cursor: "pointer" };
     return (
-        <div className="SideBar fixed inset-y-0 left-0 bg-white w-20">
+        <div className="SideBar fixed inset-y-0 left-0 bg-blue-100 w-20">
             <h1
                 className="flex items-center justify-center text-2xl h-16
              bg-purple-600 text-white font-bold ">

@@ -1,13 +1,38 @@
+"use client"; // 👈 use it here
+import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
 import { BiChevronDown } from "react-icons/bi";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
-import CardItem from "@/components/CardItem";
+import CardItem, { PriorityType } from "@/components/CardItem";
+import { DragDropContext, Draggable, Droppable, resetServerContext } from "react-beautiful-dnd";
 
 import data from "../../json/db.json";
 
+const bgColorColumn: PriorityType = {
+    [0]: "bg-slate-100",
+    [1]: "bg-indigo-100",
+    [2]: "bg-sky-100",
+    [3]: "bg-orange-100",
+    [4]: "bg-green-100",
+};
+const bgColorTitle: PriorityType = {
+    [0]: "bg-slate-200",
+    [1]: "bg-indigo-200",
+    [2]: "bg-sky-200",
+    [3]: "bg-orange-200",
+    [4]: "bg-green-300",
+};
+
 export default function Home() {
+    const [ready, setReady] = useState(false);
+    useEffect(() => {
+        if (window !== undefined && window !== null && typeof window !== "undefined") {
+            setReady(true);
+        }
+    }, []);
+
     return (
         <Layout>
             <div className="Board-Header p-10">
@@ -25,7 +50,7 @@ export default function Home() {
                                 width="32"
                                 height="32"
                                 alt={"img"}
-                                className="object-cover rounded-full"
+                                className="rounded-full"
                             />
                         </li>
                         <li className="min-w-max flex items-center">
@@ -34,7 +59,7 @@ export default function Home() {
                                 width="32"
                                 height="32"
                                 alt={"img"}
-                                className="object-cover rounded-full"
+                                className=" rounded-full"
                             />
                         </li>
                         <li className="min-w-max flex items-center">
@@ -43,34 +68,52 @@ export default function Home() {
                                 width="32"
                                 height="32"
                                 alt={"img"}
-                                className="object-cover rounded-full"
+                                className=" rounded-full"
                             />
                         </li>
                         <li className="flex items-center">
-                            <button
-                                className="border border-dashed border-sky-500
-                             text-gray-500 rounded-full">
+                            <button className="border border-dashed border-sky-500 text-gray-500 rounded-full">
                                 <AiOutlinePlus className="w-5 h-5"></AiOutlinePlus>
                             </button>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div className="Board-Columns flex m-4 flex-row gap-4">
-                {data.map((column, idx) => {
-                    return (
-                        <div key={idx} className="basis-1/3 flex flex-col gap-4 rounded-sm shadow-md bg-pink-500 p-4 ">
-                            <h4 className="flex items-center justify-between mb-5">
-                                {column.name}
-                                <BiDotsVerticalRounded />
-                            </h4>
-                            {column.items.map((item, idx) => {
-                                return <CardItem key={idx} task={item} />;
-                            })}
-                        </div>
-                    );
-                })}
-            </div>
+            {ready && (
+                <DragDropContext onDragEnd={() => {}}>
+                    <div className="Board flex m-4 flex-row gap-4">
+                        {data.map((column, idx) => {
+                            return (
+                                <div key={idx} className="w-full">
+                                    <Droppable droppableId={column.name}>
+                                        {(provided) => (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.droppableProps}
+                                                className={`Column ${
+                                                    bgColorColumn[column.order]
+                                                } flex flex-col max-h-[700px] rounded-sm shadow-md`}>
+                                                <h4
+                                                    className={`${
+                                                        bgColorTitle[column.order]
+                                                    } flex items-center justify-between p-2 text-black`}>
+                                                    {column.name}
+                                                    <BiDotsVerticalRounded />
+                                                </h4>
+                                                <div className="List-Tasks flex flex-col gap-4 overflow-y-auto p-2">
+                                                    {column.items.map((item, idx) => {
+                                                        return <CardItem key={idx} task={item} />;
+                                                    })}
+                                                </div>
+                                            </div>
+                                        )}
+                                    </Droppable>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </DragDropContext>
+            )}
         </Layout>
     );
 }

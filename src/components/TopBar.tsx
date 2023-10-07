@@ -23,7 +23,7 @@ function TopBar() {
                         width="32"
                         height="32"
                         alt={"img"}
-                        className="object-cover rounded-full"
+                        className="rounded-full"
                     />
                 </div>
             </div>

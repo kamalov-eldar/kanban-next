@@ -8,6 +8,26 @@
     --background-end-rgb: 255, 255, 255;
 }
 
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar:horizontal {
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-rose-900 rounded-xl;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+}
+
+.task > ::-webkit-scrollbar-thumb {
+    @apply bg-sky-500 rounded-xl;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --foreground-rgb: 255, 255, 255;
