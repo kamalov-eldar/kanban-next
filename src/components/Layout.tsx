@@ -9,10 +9,10 @@ type Props = {
 
 function Layout({ children }: Props) {
     return (
-        <div className="min-w-full min-h-screen bg-blue-100 w-40">
+        <div className="Layout min-h-screen bg-blue-100 ">
             <TopBar></TopBar>
             <SideBar></SideBar>
-            <main>{children}</main>
+            <main className="pl-20 pt-16">{children}</main>
         </div>
     );
 }

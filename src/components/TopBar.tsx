@@ -16,9 +16,15 @@ function TopBar() {
             </div>
             <div className="flex space-x-5">
                 <FaRegBell className="w-7 h-7" />
-                <div className="User">
+                <div className="User flex items-center whitespace-nowrap space-x-4">
                     <h3>Mr. User</h3>
-                    <Image src="https://randomuser.me/api/portraits/men/75.jpg" width="32" height="32" objectFit="cover" alt={"img"} />
+                    <Image
+                        src="https://randomuser.me/api/portraits/men/75.jpg"
+                        width="32"
+                        height="32"
+                        alt={"img"}
+                        className="object-cover rounded-full"
+                    />
                 </div>
             </div>
         </div>
