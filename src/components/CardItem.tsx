@@ -1,4 +1,4 @@
-"use client"; // 👈 use it here
+//"use client"; // 👈 use it here
 
 import React, { FC } from "react";
 import { VscCommentDiscussion } from "react-icons/vsc";

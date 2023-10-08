@@ -5,11 +5,8 @@ import CardItem, { PriorityType } from "./CardItem";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { DragDropContext, Draggable, DropResult, Droppable, resetServerContext } from "react-beautiful-dnd";
 import dataJson from "../../json/db.json";
-
 import { v4 as uuid } from "uuid";
 import { DndContext } from "@/context/DndContext";
-
-let _id = uuid();
 
 const bgColorColumn: PriorityType = {
     [0]: "bg-slate-100",
@@ -26,7 +23,7 @@ const bgColorTitle: PriorityType = {
     [4]: "bg-green-300",
 };
 
-const Drag = () => {
+const BoardContent = () => {
     const [data, setdata] = useState<IColumn[]>([]);
 
     useEffect(() => {
@@ -46,33 +43,40 @@ const Drag = () => {
         newData[columnPushIdx].items.splice(taskPushIdx, 0, dragItem);
         setdata(newData);
     }
-    
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
             <div className="Board-Content flex m-4 flex-row gap-4">
                 {data.map((column, idx) => (
                     <div key={column.name} className="w-full">
                         <Droppable key={idx} droppableId={`${idx}`}>
-                            {(provided) => (
-                                <div
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                    className={`Column ${bgColorColumn[column.order]}
-                                     flex flex-col max-h-[700px] rounded-sm shadow-md`}>
-                                    <h4
-                                        className={`${bgColorTitle[column.order]}
+                            {(provided, snapshot) => {
+                                const highlight = {
+                                    bg: snapshot.isDraggingOver ? "bg-green-50" : bgColorColumn[column.order],
+                                    shadow: snapshot.isDraggingOver ? "shadow-2xl" : "shadow-md",
+                                };
+                                return (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                        className={`Column flex flex-col max-h-[700px] min-w-[180px] rounded-sm
+                                        ${highlight.bg} ${highlight.shadow}
+                                        `}>
+                                        <h4
+                                            className={`${bgColorTitle[column.order]}
                                         flex items-center justify-between p-2 text-black`}>
-                                        {column.name}
-                                        <BiDotsVerticalRounded />
-                                    </h4>
-                                    <div className="List-Tasks flex flex-col gap-4 overflow-y-auto p-2">
-                                        {column.items.map((item, idx) => {
-                                            return <CardItem index={idx} key={item.id} task={item} />;
-                                        })}
-                                        {provided.placeholder}
+                                            {column.name}
+                                            <BiDotsVerticalRounded />
+                                        </h4>
+                                        <div className="List-Tasks flex flex-col gap-4 overflow-y-auto p-2">
+                                            {column.items.map((item, idx) => {
+                                                return <CardItem index={idx} key={item.id} task={item} />;
+                                            })}
+                                            {provided.placeholder}
+                                        </div>
                                     </div>
-                                </div>
-                            )}
+                                );
+                            }}
                         </Droppable>
                     </div>
                 ))}
@@ -81,4 +85,4 @@ const Drag = () => {
     );
 };
 
-export default Drag;
+export default BoardContent;

@@ -1,4 +1,4 @@
-"use client"; // 👈 use it here
+//"use client"; // 👈 use it here
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
@@ -8,8 +8,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import CardItem, { PriorityType } from "@/components/CardItem";
 import { DragDropContext, Draggable, Droppable, resetServerContext } from "react-beautiful-dnd";
 
-
-import Drag from "@/components/Drag";
+import BoardContent from "@/components/BoardContent";
 
 export interface IColumn {
     id: number;
@@ -26,21 +25,6 @@ export interface IColumn {
         }[];
     }[];
 }
-
-const bgColorColumn: PriorityType = {
-    [0]: "bg-slate-100",
-    [1]: "bg-indigo-100",
-    [2]: "bg-sky-100",
-    [3]: "bg-orange-100",
-    [4]: "bg-green-100",
-};
-const bgColorTitle: PriorityType = {
-    [0]: "bg-slate-200",
-    [1]: "bg-indigo-200",
-    [2]: "bg-sky-200",
-    [3]: "bg-orange-200",
-    [4]: "bg-green-300",
-};
 
 export default function Home() {
     /*  const [ready, setReady] = useState(false);
@@ -96,45 +80,7 @@ export default function Home() {
                     </ul>
                 </div>
             </div>
-            <Drag></Drag>
-            {/*  {"ready" && (
-                <DragDropContext
-                    onDragEnd={() => {
-                        console.log("onDragEnd");
-                    }}>
-                    <div className="Board-Content flex m-4 flex-row gap-4">
-                        {data.map((column, idx) => {
-                            return (
-                                <div key={idx} className="w-full">
-                                    <Droppable droppableId={column.name}>
-                                        {(provided) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.droppableProps}
-                                                className={`Column ${
-                                                    bgColorColumn[column.order]
-                                                } flex flex-col max-h-[700px] rounded-sm shadow-md`}>
-                                                <h4
-                                                    className={`${
-                                                        bgColorTitle[column.order]
-                                                    } flex items-center justify-between p-2 text-black`}>
-                                                    {column.name}
-                                                    <BiDotsVerticalRounded />
-                                                </h4>
-                                                <div className="List-Tasks flex flex-col gap-4 overflow-y-auto p-2">
-                                                    {column.items.map((item, idx) => {
-                                                        return <CardItem key={idx} task={item} />;
-                                                    })}
-                                                </div>
-                                            </div>
-                                        )}
-                                    </Droppable>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </DragDropContext>
-            )} */}
+            <BoardContent />
         </Layout>
     );
 }
