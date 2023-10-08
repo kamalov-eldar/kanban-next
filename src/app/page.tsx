@@ -1,4 +1,4 @@
-//"use client"; // 👈 use it here
+"use client"; // 👈 use it here
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
@@ -8,7 +8,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 import CardItem, { PriorityType } from "@/components/CardItem";
 import { DragDropContext, Draggable, Droppable, resetServerContext } from "react-beautiful-dnd";
 
-import data from "../../json/db.json";
 
 import Drag from "@/components/Drag";
 

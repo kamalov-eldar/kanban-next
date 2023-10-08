@@ -6,6 +6,11 @@ import { BiDotsVerticalRounded } from "react-icons/bi";
 import { DragDropContext, Draggable, DropResult, Droppable, resetServerContext } from "react-beautiful-dnd";
 import dataJson from "../../json/db.json";
 
+import { v4 as uuid } from "uuid";
+import { DndContext } from "@/context/DndContext";
+
+let _id = uuid();
+
 const bgColorColumn: PriorityType = {
     [0]: "bg-slate-100",
     [1]: "bg-indigo-100",
@@ -22,25 +27,45 @@ const bgColorTitle: PriorityType = {
 };
 
 const Drag = () => {
-    const [data, setdata] = useState<IColumn[]>(dataJson);
+    const [data, setdata] = useState<IColumn[]>([]);
 
-    /* useEffect(() => {
+    useEffect(() => {
         setdata(dataJson);
-    }, []); */
+    }, []);
 
     function handleDragEnd(e: DropResult) {
-        console.log("e: ", e);
         const { source, destination } = e;
+        if (!destination) return;
         if (source.droppableId === destination?.droppableId) {
-          
+            //console.log("data: ", data);
+            const newArr = [...data];
+            const currentColumnIdx = Number(source.droppableId);
+            console.log("e: ", e);
+            const delTaskIdx = newArr[currentColumnIdx].items.findIndex((item) => item.id === source.index);
+            const [currentTask] = newArr[currentColumnIdx].items.splice(delTaskIdx, 1);
+            newArr[currentColumnIdx].items.splice(destination.index, 0, currentTask);
+            setdata(newArr);
         }
     }
+    /*      currentColumn?.items.splice(idxTask, 1);
+        column.items.splice(idxTask + 1, 0, currentTask!);
 
+        setColumns(
+            columns.map((item) => {
+                if (item.name === column.name) {
+                    return column;
+                }
+                if (item.name === currentColumn?.name) {
+                    return currentColumn;
+                }
+                return item;
+            }),
+        ); */
     return (
-        <DragDropContext onDragEnd={handleDragEnd}>
+        <DndContext onDragEnd={handleDragEnd}>
             <div className="Board-Content flex m-4 flex-row gap-4">
                 {data.map((column, idx) => (
-                    <Droppable key={idx} droppableId={`${column.name}`}>
+                    <Droppable key={idx} droppableId={`${column.id}`}>
                         {(provided) => (
                             <div className="w-full">
                                 <div
@@ -59,13 +84,14 @@ const Drag = () => {
                                             return <CardItem key={idx} task={item} />;
                                         })}
                                     </div>
+                                    {/*  {provided.placeholder} */}
                                 </div>
                             </div>
                         )}
                     </Droppable>
                 ))}
             </div>
-        </DragDropContext>
+        </DndContext>
     );
 };
 

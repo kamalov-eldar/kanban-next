@@ -42,7 +42,7 @@ const colorPriority: PriorityType = {
 
 function CardItem({ task }: CardItemProps) {
     return (
-        <Draggable index={task.id} draggableId={`taskId-${task.id}`}>
+        <Draggable index={task.id} draggableId={`${task.id}`}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}

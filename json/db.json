@@ -1,11 +1,11 @@
 [
     {
-        "id": 1,
+        "id": 0,
         "name": "Not started",
         "order": 0,
         "items": [
             {
-                "id": 1,
+                "id": 10,
                 "priority": 0,
                 "title": "Company website redesign.",
                 "chat": 1,
@@ -17,7 +17,7 @@
                 ]
             },
             {
-                "id": 2,
+                "id": 20,
                 "priority": 2,
                 "title": "Mobile app login process prototype.",
                 "chat": 10,
@@ -29,7 +29,7 @@
                 ]
             },
             {
-                "id": 3,
+                "id": 30,
                 "priority": 2,
                 "title": "Mobile app login process prototype.",
                 "chat": 10,
@@ -41,7 +41,7 @@
                 ]
             },
             {
-                "id": 4,
+                "id": 40,
                 "priority": 2,
                 "title": "Mobile app login process prototype.",
                 "chat": 10,
@@ -53,7 +53,7 @@
                 ]
             },
             {
-                "id": 5,
+                "id": 50,
                 "priority": 2,
                 "title": "Mobile app login process prototype.",
                 "chat": 10,
@@ -67,12 +67,12 @@
         ]
     },
     {
-        "id": 2,
+        "id": 1,
         "name": "In Progress",
         "order": 1,
         "items": [
             {
-                "id": 6,
+                "id": 60,
                 "priority": 1,
                 "title": "Research and strategy for upcoming project.",
                 "chat": 0,
@@ -86,12 +86,12 @@
         ]
     },
     {
-        "id": 3,
+        "id": 2,
         "name": "In Review",
         "order": 2,
         "items": [
             {
-                "id": 7,
+                "id": 70,
                 "priority": 2,
                 "title": "Dashboard layout redesign.",
                 "chat": 13,
@@ -103,7 +103,7 @@
                 ]
             },
             {
-                "id": 8,
+                "id": 80,
                 "priority": 0,
                 "title": "Social media posts",
                 "chat": 0,
@@ -117,12 +117,12 @@
         ]
     },
     {
-        "id": 4,
+        "id": 3,
         "name": "Testing",
         "order": 3,
         "items": [
             {
-                "id": 9,
+                "id": 90,
                 "priority": 0,
                 "title": "Review client spec document and give feedback.",
                 "chat": 13,
@@ -134,7 +134,7 @@
                 ]
             },
             {
-                "id": 10,
+                "id": 100,
                 "priority": 1,
                 "title": "Navigation designs",
                 "chat": 0,
@@ -146,7 +146,7 @@
                 ]
             },
             {
-                "id": 11,
+                "id": 110,
                 "priority": 2,
                 "title": "Create style guide based on previous feedback",
                 "chat": 5,
@@ -160,12 +160,12 @@
         ]
     },
     {
-        "id": 5,
+        "id": 4,
         "name": "Done",
         "order": 4,
         "items": [
             {
-                "id": 12,
+                "id": 120,
                 "priority": 0,
                 "title": "Review client spec document and give feedback.",
                 "chat": 13,
@@ -177,7 +177,7 @@
                 ]
             },
             {
-                "id": 13,
+                "id": 130,
                 "priority": 1,
                 "title": "Navigation designs",
                 "chat": 0,
@@ -189,7 +189,7 @@
                 ]
             },
             {
-                "id": 14,
+                "id": 140,
                 "priority": 2,
                 "title": "Create style guide based on previous feedback",
                 "chat": 5,
