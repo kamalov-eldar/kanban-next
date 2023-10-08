@@ -36,38 +36,24 @@ const Drag = () => {
     function handleDragEnd(e: DropResult) {
         const { source, destination } = e;
         if (!destination) return;
-        if (source.droppableId === destination?.droppableId) {
-            //console.log("data: ", data);
-            const newArr = [...data];
-            const currentColumnIdx = Number(source.droppableId);
-            console.log("e: ", e);
-            const delTaskIdx = newArr[currentColumnIdx].items.findIndex((item) => item.id === source.index);
-            const [currentTask] = newArr[currentColumnIdx].items.splice(delTaskIdx, 1);
-            newArr[currentColumnIdx].items.splice(destination.index, 0, currentTask);
-            setdata(newArr);
-        }
+        let newData = [...data];
+        const columnIdx = Number(source.droppableId); // columnId
+        const columnPushIdx = Number(destination.droppableId); // columnId push
+        const taskIdx = Number(source.index); // index task in array columns
+        const taskPushIdx = Number(destination.index); // index task in array push columns
+        const dragItem = newData[columnIdx].items[taskIdx];
+        newData[columnIdx].items.splice(taskIdx, 1);
+        newData[columnPushIdx].items.splice(taskPushIdx, 0, dragItem);
+        setdata(newData);
     }
-    /*      currentColumn?.items.splice(idxTask, 1);
-        column.items.splice(idxTask + 1, 0, currentTask!);
-
-        setColumns(
-            columns.map((item) => {
-                if (item.name === column.name) {
-                    return column;
-                }
-                if (item.name === currentColumn?.name) {
-                    return currentColumn;
-                }
-                return item;
-            }),
-        ); */
+    
     return (
-        <DndContext onDragEnd={handleDragEnd}>
+        <DragDropContext onDragEnd={handleDragEnd}>
             <div className="Board-Content flex m-4 flex-row gap-4">
                 {data.map((column, idx) => (
-                    <Droppable key={idx} droppableId={`${column.id}`}>
-                        {(provided) => (
-                            <div className="w-full">
+                    <div key={column.name} className="w-full">
+                        <Droppable key={idx} droppableId={`${idx}`}>
+                            {(provided) => (
                                 <div
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
@@ -81,17 +67,17 @@ const Drag = () => {
                                     </h4>
                                     <div className="List-Tasks flex flex-col gap-4 overflow-y-auto p-2">
                                         {column.items.map((item, idx) => {
-                                            return <CardItem key={idx} task={item} />;
+                                            return <CardItem index={idx} key={item.id} task={item} />;
                                         })}
+                                        {provided.placeholder}
                                     </div>
-                                    {/*  {provided.placeholder} */}
                                 </div>
-                            </div>
-                        )}
-                    </Droppable>
+                            )}
+                        </Droppable>
+                    </div>
                 ))}
             </div>
-        </DndContext>
+        </DragDropContext>
     );
 };
 

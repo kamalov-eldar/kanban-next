@@ -22,6 +22,7 @@ export interface Assignee {
 
 type CardItemProps = {
     task: ICardItem;
+    index: number;
 };
 
 export type PriorityType = {
@@ -40,9 +41,9 @@ const colorPriority: PriorityType = {
     [2]: "from-red-500 to-red-200",
 };
 
-function CardItem({ task }: CardItemProps) {
+function CardItem({ task, index }: CardItemProps) {
     return (
-        <Draggable index={task.id} draggableId={`${task.id}`}>
+        <Draggable index={index} draggableId={`${task.id}`}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}
