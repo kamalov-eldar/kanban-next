@@ -1,4 +1,4 @@
-"use client"; // 👈 use it here
+//"use client"; // 👈 use it here
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import Image from "next/image";
@@ -26,12 +26,12 @@ const bgColorTitle: PriorityType = {
 };
 
 export default function Home() {
-    const [ready, setReady] = useState(false);
+    /*  const [ready, setReady] = useState(false);
     useEffect(() => {
         if (window !== undefined && window !== null && typeof window !== "undefined") {
             setReady(true);
         }
-    }, []);
+    }, []); */
 
     return (
         <Layout>
@@ -79,8 +79,11 @@ export default function Home() {
                     </ul>
                 </div>
             </div>
-            {ready && (
-                <DragDropContext onDragEnd={() => {}}>
+            {"ready" && (
+                <DragDropContext
+                    onDragEnd={() => {
+                        console.log("onDragEnd");
+                    }}>
                     <div className="Board flex m-4 flex-row gap-4">
                         {data.map((column, idx) => {
                             return (
