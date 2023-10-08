@@ -1,4 +1,4 @@
-'use client' // 👈 use it here
+"use client"; // 👈 use it here
 
 import React, { FC } from "react";
 import { VscCommentDiscussion } from "react-icons/vsc";
@@ -42,8 +42,7 @@ const colorPriority: PriorityType = {
 
 function CardItem({ task }: CardItemProps) {
     return (
-        /*  <div> */
-        <Draggable index={task.id} draggableId={task.id.toString()}>
+        <Draggable index={task.id} draggableId={`taskId-${task.id}`}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}
@@ -84,7 +83,6 @@ function CardItem({ task }: CardItemProps) {
                 </div>
             )}
         </Draggable>
-        /*  </div> */
     );
 }
 

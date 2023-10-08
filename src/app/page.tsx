@@ -10,6 +10,24 @@ import { DragDropContext, Draggable, Droppable, resetServerContext } from "react
 
 import data from "../../json/db.json";
 
+import Drag from "@/components/Drag";
+
+export interface IColumn {
+    id: number;
+    name: string;
+    order: number;
+    items: {
+        id: number;
+        priority: number;
+        title: string;
+        chat: number;
+        attachment: number;
+        assignees: {
+            avt: string;
+        }[];
+    }[];
+}
+
 const bgColorColumn: PriorityType = {
     [0]: "bg-slate-100",
     [1]: "bg-indigo-100",
@@ -79,12 +97,13 @@ export default function Home() {
                     </ul>
                 </div>
             </div>
-            {"ready" && (
+            <Drag></Drag>
+            {/*  {"ready" && (
                 <DragDropContext
                     onDragEnd={() => {
                         console.log("onDragEnd");
                     }}>
-                    <div className="Board flex m-4 flex-row gap-4">
+                    <div className="Board-Content flex m-4 flex-row gap-4">
                         {data.map((column, idx) => {
                             return (
                                 <div key={idx} className="w-full">
@@ -116,7 +135,7 @@ export default function Home() {
                         })}
                     </div>
                 </DragDropContext>
-            )}
+            )} */}
         </Layout>
     );
 }
